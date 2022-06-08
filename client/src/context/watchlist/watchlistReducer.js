@@ -1,4 +1,9 @@
-import { GET_WATCHLIST, ADD_WATCHLIST, WATCHLIST_ERROR } from "../types";
+import {
+  GET_WATCHLIST,
+  ADD_WATCHLIST,
+  WATCHLIST_ERROR,
+  DELETE_WATCHLIST,
+} from "../types";
 
 const watchlistReducer = (state, action) => {
   switch (action.type) {
@@ -12,6 +17,13 @@ const watchlistReducer = (state, action) => {
       return {
         ...state,
         watchlist: [action.payload, ...state.watchlist],
+      };
+    case DELETE_WATCHLIST:
+      return {
+        ...state,
+        watchlist: state.watchlist.filter(
+          (watchlist) => watchlist._id !== action.payload
+        ),
       };
     default:
       return state;

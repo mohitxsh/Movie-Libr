@@ -9,7 +9,13 @@ const WatchlistSchema = new Schema({
 	i: {
 		type: String,
 	},
-    poster:{
+    poster: {
+        type: String,
+    },
+    plot: {
+        type: String,
+    },
+    actors: {
         type: String,
     },
 	t: {

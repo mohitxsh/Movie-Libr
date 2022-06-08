@@ -1,5 +1,5 @@
 import { useFetch } from "../../data/useFetch";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import MovieCard from "./MovieCard";
 import WatchlistCard from "./WatchlistCard";
 const API_KEY = "54ad1ace";
@@ -70,7 +70,7 @@ const Search = (props) => {
       ) : (
         <div>
           <div className='px-5 pt-8 mx-10 lg:px-28 mb-4 text-2xl font-bold tracking-tighter text-black  md:text-2xl title-font'>
-            Your Watchlist
+            <div>Your Watchlist</div>
           </div>
           <WatchlistCard />
         </div>

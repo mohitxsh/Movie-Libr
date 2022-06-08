@@ -15,8 +15,12 @@ const style = {
 
 const MovieCard = (props) => {
   const [open, setOpen] = React.useState(false);
+  const [watchlistText, setWatchlistText] = useState("Add to Watchlist");
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setWatchlistText("Add to Watchlist!");
+    setOpen(false)
+  };
   const { title } = props;
   //console.log(title);
   //context
@@ -30,12 +34,16 @@ const MovieCard = (props) => {
   }
   const { loading, data } = useFetch(url);
   console.log(data);
+
   const onSubmit = (e) => {
     e.preventDefault();
+    setWatchlistText("Added to Watchlist");
     !loading &&
       addWatchlist({
         i: data.imdbRating,
         poster: data.Poster,
+        plot: data.Plot,
+        actors: data.Actors,
         t: data.Title,
         year: data.Released,
       });
@@ -44,7 +52,7 @@ const MovieCard = (props) => {
   return (
     <div>
       <div
-        className=' py-1 flex flex-col justify-center sm:py-4 '
+        className='m-10 py-1 flex flex-col justify-center sm:py-4 '
         onClick={handleOpen}>
         <div className='py-3 sm:max-w-xl sm:mx-auto'>
           <div className='hover:-translate-y-2 transition ease-in-out duration-500 hover:shadow-2xl bg-white shadow-lg border-gray-100 max-h-80	 border sm:rounded-3xl p-8 flex space-x-8'>
@@ -63,11 +71,6 @@ const MovieCard = (props) => {
                 <div className='text-sm text-gray-400'>{props.type}</div>
                 <div className='text-lg text-gray-800'>{props.year}</div>
               </div>
-              <p className=' text-gray-400 max-h-40 overflow-y-hidden'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-              <div className='flex text-2xl font-bold text-a'>$83.90</div>
             </div>
           </div>
         </div>
@@ -82,10 +85,7 @@ const MovieCard = (props) => {
             className='w-96 overflow-hidden rounded-xl relative transform shadow-lg hover:shadow-2xl movie-item text-white movie-card'
             data-movie-id={438631}>
             <div className='absolute inset-0 z-10 transition duration-300 ease-in-out bg-gradient-to-t from-black via-gray-900 to-transparent' />
-            <div
-              className='relative cursor-pointer group z-10 px-10 pt-10 space-y-6 movie_info'
-              data-lity=''
-              href='https://www.youtube.com/embed/aSHs224Dge0'>
+            <div className='relative cursor-pointer group z-10 px-10 pt-10 space-y-6 movie_info'>
               <div className='poster__info align-self-end w-full'>
                 <div className='h-32' />
                 <div className='space-y-6 detail_info'>
@@ -136,21 +136,9 @@ const MovieCard = (props) => {
               <a
                 className='flex items-center py-2 px-4 rounded-full mx-auto text-white bg-red-500 hover:bg-red-700'
                 data-unsp-sanitized='clean'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='w-6 h-6'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'>
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
-                  />
-                </svg>
+                <svg className="h-6 w-6 fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M75.23 33.4L320 63.1L564.8 33.4C571.5 32.56 578 36.06 581.1 42.12L622.8 125.5C631.7 143.4 622.2 165.1 602.9 170.6L439.6 217.3C425.7 221.2 410.8 215.4 403.4 202.1L320 63.1L236.6 202.1C229.2 215.4 214.3 221.2 200.4 217.3L37.07 170.6C17.81 165.1 8.283 143.4 17.24 125.5L58.94 42.12C61.97 36.06 68.5 32.56 75.23 33.4H75.23zM321.1 128L375.9 219.4C390.8 244.2 420.5 255.1 448.4 248L576 211.6V378.5C576 400.5 561 419.7 539.6 425.1L335.5 476.1C325.3 478.7 314.7 478.7 304.5 476.1L100.4 425.1C78.99 419.7 64 400.5 64 378.5V211.6L191.6 248C219.5 255.1 249.2 244.2 264.1 219.4L318.9 128H321.1z"/></svg>
                 <div className='text-sm text-white ml-2' onClick={onSubmit}>
-                  Add to list
+                  {watchlistText}
                 </div>
               </a>
             </div>

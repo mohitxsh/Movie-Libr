@@ -2,7 +2,12 @@ import React, { useReducer } from "react";
 import WatchlistContext from "./watchlistContext";
 import axios from "axios";
 import watchlistReducer from "./watchlistReducer";
-import { GET_WATCHLIST, ADD_WATCHLIST, WATCHLIST_ERROR } from "../types";
+import {
+  GET_WATCHLIST,
+  ADD_WATCHLIST,
+  WATCHLIST_ERROR,
+  DELETE_WATCHLIST,
+} from "../types";
 
 const WatchlistState = (props) => {
   const initialState = {
@@ -31,12 +36,27 @@ const WatchlistState = (props) => {
       },
     };
     try {
-      const res = await axios.post("http://localhost:5000/api/watchlist", watchlist, config);
+      const res = await axios.post(
+        "http://localhost:5000/api/watchlist",
+        watchlist,
+        config
+      );
       dispatch({ type: ADD_WATCHLIST, payload: res.data });
     } catch (err) {
       dispatch({ type: WATCHLIST_ERROR, payload: err.response.msg });
     }
   };
+
+  //DELETE WATCHLIST
+  const deleteWatchlist = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/watchlist/${id}`);
+      dispatch({ type: DELETE_WATCHLIST, payload: id });
+    } catch (err) {
+      dispatch({ type: WATCHLIST_ERROR, payload: err.response.msg });
+    }
+  };
+
   return (
     <WatchlistContext.Provider
       value={{
@@ -45,6 +65,7 @@ const WatchlistState = (props) => {
         error: state.error,
         addWatchlist,
         getWatchlist,
+        deleteWatchlist,
       }}>
       {props.children}
     </WatchlistContext.Provider>

@@ -19,7 +19,7 @@ function App() {
       <WatchlistState>
         <Router>
           <Fragment>
-            <div className='container'>
+            <div className='container bg-[#F3F4F6]'>
               <Switch>
                 <PrivateRoute exact path='/' component={Home} />
                 <Route exact path='/register' component={Register} />

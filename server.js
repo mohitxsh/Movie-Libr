@@ -18,15 +18,9 @@ app.get("/", (req, res) =>
 app.use("/api/users", require("./routes/users"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/watchlist", require("./routes/watchlist"));
-
+app.use(express.static(path.join(__dirname, "client", "build")));
 const PORT = process.env.PORT || 5000;
-if (
-  process.env.NODE_ENV === "production" ||
-  process.env.NODE_ENV === "staging"
-) {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname + "/client/build/index.html"));
-  });
-}
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

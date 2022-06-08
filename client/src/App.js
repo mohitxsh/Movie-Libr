@@ -29,7 +29,6 @@ function App() {
                 <PrivateRoute exact path='/' component={Home} />
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/login' component={Login} />
-                <Redirect exact path='*' to={Home} />
               </Switch>
             </div>
           </Fragment>

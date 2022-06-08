@@ -11,7 +11,7 @@ connectDB();
 //init Middleware
 app.use(express.json({ extended: false }));
 
-app.get("/", (req, res) =>
+app.get("/api", (req, res) =>
   res.json({ msg: "Welcome to the movie library API" })
 );
 

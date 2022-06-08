@@ -1,7 +1,8 @@
 import { useFetch } from "../../data/useFetch";
-import * as React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import WatchlistContext from "../../context/watchlist/watchlistContext";
 const API_KEY = "54ad1ace";
 
 const style = {
@@ -18,22 +19,43 @@ const MovieCard = (props) => {
   const handleClose = () => setOpen(false);
   const { title } = props;
   //console.log(title);
+  //context
+  const watchlistContext = useContext(WatchlistContext);
+  const { addWatchlist } = watchlistContext;
+
+  const [watchlist, setWatchlist] = useState({
+    i: "",
+    poster: "",
+    t: "",
+    year: "",
+  });
 
   let url = "https://www.omdbapi.com/?apikey=" + API_KEY;
 
   if (open) {
     url += "&t=" + title;
-  
   }
-  const { data } = useFetch(url);
+  const { loading, data } = useFetch(url);
   console.log(data);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    !loading && setWatchlist({
+      i: data.imdbRating,
+      poster: data.Poster,
+      t: data.Title,
+      year: data.Released,
+    });
+  };
+  useEffect(() => {
+    addWatchlist(watchlist);
+  }, [watchlist]);
   return (
     <div>
       <div
         className=' py-1 flex flex-col justify-center sm:py-4 '
         onClick={handleOpen}>
         <div className='py-3 sm:max-w-xl sm:mx-auto'>
-          <div className='bg-white shadow-lg border-gray-100 max-h-80	 border sm:rounded-3xl p-8 flex space-x-8'>
+          <div className='hover:-translate-y-2 transition ease-in-out duration-500 hover:shadow-2xl bg-white shadow-lg border-gray-100 max-h-80	 border sm:rounded-3xl p-8 flex space-x-8'>
             <div className='h-48 overflow-visible w-1/2'>
               <img
                 className='rounded-3xl shadow-lg'
@@ -44,7 +66,6 @@ const MovieCard = (props) => {
             <div className='flex flex-col w-1/2 space-y-4'>
               <div className='flex justify-between items-start'>
                 <h2 className='text-3xl font-bold'>{props.title}</h2>
-                
               </div>
               <div>
                 <div className='text-sm text-gray-400'>{props.type}</div>
@@ -66,7 +87,7 @@ const MovieCard = (props) => {
         aria-describedby='modal-modal-description'>
         <Box sx={style}>
           <div
-            className='w-96 overflow-hidden rounded-xl relative transform hover:-translate-y-2 transition ease-in-out duration-500 shadow-lg hover:shadow-2xl movie-item text-white movie-card'
+            className='w-96 overflow-hidden rounded-xl relative transform shadow-lg hover:shadow-2xl movie-item text-white movie-card'
             data-movie-id={438631}>
             <div className='absolute inset-0 z-10 transition duration-300 ease-in-out bg-gradient-to-t from-black via-gray-900 to-transparent' />
             <div
@@ -100,20 +121,16 @@ const MovieCard = (props) => {
                       <div className='text-sm text-gray-400'>Runtime:</div>
                     </div>
                   </div>
-                  
+
                   <div className='flex flex-col overview'>
                     <div className='flex flex-col' />
                     <div className='text-xs text-gray-400 mb-2'>Actors:</div>
-                    <p className='text-xs text-gray-100'>
-                      {data.Actors}
-                    </p>
+                    <p className='text-xs text-gray-100'>{data.Actors}</p>
                   </div>
                   <div className='flex flex-col overview'>
                     <div className='flex flex-col' />
                     <div className='text-xs text-gray-400 mb-2'>Overview:</div>
-                    <p className='text-xs text-gray-100 mb-8'>
-                      {data.Plot}
-                    </p>
+                    <p className='text-xs text-gray-100 mb-8'>{data.Plot}</p>
                   </div>
                 </div>
               </div>
@@ -126,8 +143,6 @@ const MovieCard = (props) => {
             <div className='poster__footer flex flex-row relative pb-10 space-x-4 z-10'>
               <a
                 className='flex items-center py-2 px-4 rounded-full mx-auto text-white bg-red-500 hover:bg-red-700'
-                href='http://www.google.com/calendar/event?action=TEMPLATE&dates=20210915T010000Z%2F20210915T010000Z&text=Dune%20%2D%20Movie%20Premiere&location=http%3A%2F%2Fmoviedates.info&details=This%20reminder%20was%20created%20through%20http%3A%2F%2Fmoviedates.info'
-                target='_blank'
                 data-unsp-sanitized='clean'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -142,7 +157,9 @@ const MovieCard = (props) => {
                     d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
                   />
                 </svg>
-                <div className='text-sm text-white ml-2'>Add to list</div>
+                <div className='text-sm text-white ml-2' onClick={onSubmit}>
+                  Add to list
+                </div>
               </a>
             </div>
           </div>

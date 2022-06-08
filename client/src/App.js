@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import "./App.css";
 import AuthState from "./context/auth/AuthState";
+import WatchlistState from "./context/watchlist/WatchlistState";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import setAuthToken from "./utils/setAuthToken";
@@ -15,17 +16,19 @@ if (localStorage.token) {
 function App() {
   return (
     <AuthState>
-      <Router>
-        <Fragment>
-          <div className='container'>
-            <Switch>
-              <PrivateRoute exact path='/' component={Home} />
-              <Route exact path='/register' component={Register} />
-              <Route exact path='/login' component={Login} />
-            </Switch>
-          </div>
-        </Fragment>
-      </Router>
+      <WatchlistState>
+        <Router>
+          <Fragment>
+            <div className='container'>
+              <Switch>
+                <PrivateRoute exact path='/' component={Home} />
+                <Route exact path='/register' component={Register} />
+                <Route exact path='/login' component={Login} />
+              </Switch>
+            </div>
+          </Fragment>
+        </Router>
+      </WatchlistState>
     </AuthState>
   );
 }

@@ -21,7 +21,7 @@ const WatchlistState = (props) => {
   //GET WATCHLIST
   const getWatchlist = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/watchlist");
+      const res = await axios.get("/api/watchlist");
       dispatch({ type: GET_WATCHLIST, payload: res.data });
     } catch (err) {
       dispatch({ type: WATCHLIST_ERROR, payload: err.response.msg });
@@ -36,11 +36,7 @@ const WatchlistState = (props) => {
       },
     };
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/watchlist",
-        watchlist,
-        config
-      );
+      const res = await axios.post("/api/watchlist", watchlist, config);
       dispatch({ type: ADD_WATCHLIST, payload: res.data });
     } catch (err) {
       dispatch({ type: WATCHLIST_ERROR, payload: err.response.msg });
@@ -50,7 +46,7 @@ const WatchlistState = (props) => {
   //DELETE WATCHLIST
   const deleteWatchlist = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/watchlist/${id}`);
+      await axios.delete(`/api/watchlist/${id}`);
       dispatch({ type: DELETE_WATCHLIST, payload: id });
     } catch (err) {
       dispatch({ type: WATCHLIST_ERROR, payload: err.response.msg });

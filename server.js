@@ -1,7 +1,7 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const cors = require("cors");
-
+const path = require("path");
 const app = express();
 app.use(cors());
 //connect database
@@ -18,6 +18,13 @@ app.get("/", (req, res) =>
 app.use("/api/users", require("./routes/users"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/watchlist", require("./routes/watchlist"));
+
+if (process.env.NODE_ENV === "production" || process.env.NODE_ENV === "staging") {
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  });
+ }
 
 const PORT = process.env.PORT || 5000;
 

@@ -2,7 +2,12 @@ import React, { Fragment } from "react";
 import "./App.css";
 import AuthState from "./context/auth/AuthState";
 import WatchlistState from "./context/watchlist/WatchlistState";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import setAuthToken from "./utils/setAuthToken";
 import Login from "./components/auth/Login";
@@ -21,9 +26,10 @@ function App() {
           <Fragment>
             <div className='container bg-[#F3F4F6]'>
               <Switch>
-                <Route exact path='/' component={Home} />
+                <PrivateRoute exact path='/' component={Home} />
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/login' component={Login} />
+                <Redirect exact path='*' to={Home} />
               </Switch>
             </div>
           </Fragment>

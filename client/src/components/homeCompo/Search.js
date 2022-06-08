@@ -1,6 +1,7 @@
 import { useFetch } from "../../data/useFetch";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import MovieCard from "./MovieCard";
+import WatchlistCard from "./WatchlistCard";
 const API_KEY = "54ad1ace";
 
 const Search = (props) => {
@@ -21,12 +22,26 @@ const Search = (props) => {
 
   const { data } = useFetch(url);
 
-const renderedResults = data['Search']?.map((d) => {
-  return(
-    <MovieCard key = {d.imdbID} imgUrl = {d.Poster} title = {d.Title} type = {d.Type} year = {d.Year} />
-  );
-})
-
+  const renderedResults = data["Search"]?.map((d) => {
+    return (
+      <MovieCard
+        key={d.imdbID}
+        imgUrl={d.Poster}
+        title={d.Title}
+        type={d.Type}
+        year={d.Year}
+      />
+    );
+  });
+  const SearchedMovies = () => {
+    return (
+      <div>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+          {renderedResults}
+        </div>
+      </div>
+    );
+  };
   return (
     <div>
       <div className=' flex flex-col justify-center'>
@@ -35,7 +50,7 @@ const renderedResults = data['Search']?.map((d) => {
             <form className='relative flex z-50 bg-white rounded-full'>
               <input
                 type='text'
-                placeholder='enter your search here'
+                placeholder='search epic movies here'
                 className='rounded-full flex-1 px-6 py-4 text-gray-700 focus:outline-none'
                 value={term}
                 onChange={(e) => {
@@ -50,9 +65,16 @@ const renderedResults = data['Search']?.map((d) => {
           </div>
         </div>
       </div>
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
-        {renderedResults}
-      </div>
+      {term ? (
+        <SearchedMovies />
+      ) : (
+        <div>
+          <div className='px-5 pt-8 mx-10 lg:px-28 mb-4 text-2xl font-bold tracking-tighter text-black  md:text-2xl title-font'>
+            Your Watchlist
+          </div>
+          <WatchlistCard />
+        </div>
+      )}
     </div>
   );
 };

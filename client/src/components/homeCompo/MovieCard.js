@@ -23,13 +23,6 @@ const MovieCard = (props) => {
   const watchlistContext = useContext(WatchlistContext);
   const { addWatchlist } = watchlistContext;
 
-  const [watchlist, setWatchlist] = useState({
-    i: "",
-    poster: "",
-    t: "",
-    year: "",
-  });
-
   let url = "https://www.omdbapi.com/?apikey=" + API_KEY;
 
   if (open) {
@@ -39,16 +32,15 @@ const MovieCard = (props) => {
   console.log(data);
   const onSubmit = (e) => {
     e.preventDefault();
-    !loading && setWatchlist({
-      i: data.imdbRating,
-      poster: data.Poster,
-      t: data.Title,
-      year: data.Released,
-    });
+    !loading &&
+      addWatchlist({
+        i: data.imdbRating,
+        poster: data.Poster,
+        t: data.Title,
+        year: data.Released,
+      });
   };
-  useEffect(() => {
-    addWatchlist(watchlist);
-  }, [watchlist]);
+
   return (
     <div>
       <div

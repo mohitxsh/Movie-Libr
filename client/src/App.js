@@ -21,7 +21,7 @@ function App() {
           <Fragment>
             <div className='container bg-[#F3F4F6]'>
               <Switch>
-                <PrivateRoute exact path='/' component={Home} />
+                <Route exact path='/' component={Home} />
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/login' component={Login} />
               </Switch>

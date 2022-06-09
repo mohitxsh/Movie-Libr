@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 5000;
 app.use("/api/users", require("./routes/users"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/watchlist", require("./routes/watchlist"));
+app.use("/api/playlist", require("./routes/playlist"));
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.get("*", (req, res) => {

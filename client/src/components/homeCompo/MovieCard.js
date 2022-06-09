@@ -3,6 +3,10 @@ import React, { useContext, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import WatchlistContext from "../../context/watchlist/watchlistContext";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+
 const API_KEY = "54ad1ace";
 
 const style = {
@@ -18,9 +22,12 @@ const MovieCard = (props) => {
   const [watchlistText, setWatchlistText] = useState("Add to Watchlist");
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    setWatchlistText("Add to Watchlist!");
-    setOpen(false)
+    setWatchlistText("Add to Watchlist");
+    setOpen(false);
   };
+  const [playlistopen, setPlaylistopen] = React.useState(false);
+  const handlePlaylistOpen = () => setPlaylistopen(true);
+  const handlePlaylistClose = () => setPlaylistopen(false);
   const { title } = props;
   //console.log(title);
   //context
@@ -47,6 +54,14 @@ const MovieCard = (props) => {
         t: data.Title,
         year: data.Released,
       });
+  };
+  const [checked, setChecked] = React.useState(true);
+  const handleChecked = () => {
+    if (checked === true) {
+      setChecked(false);
+    } else {
+      setChecked(true);
+    }
   };
 
   return (
@@ -132,16 +147,71 @@ const MovieCard = (props) => {
               src={data.Poster}
               style={{ filter: "grayscale(0)" }}
             />
-            <div className='poster__footer flex flex-row relative pb-10 space-x-4 z-10'>
+            <div className='poster__footer flex flex-row relative pb-10 space-x-4 z-10 mr-5'>
               <a
                 className='flex items-center py-2 px-4 rounded-full mx-auto text-white bg-red-500 hover:bg-red-700'
                 data-unsp-sanitized='clean'>
-                <svg className="h-6 w-6 fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M75.23 33.4L320 63.1L564.8 33.4C571.5 32.56 578 36.06 581.1 42.12L622.8 125.5C631.7 143.4 622.2 165.1 602.9 170.6L439.6 217.3C425.7 221.2 410.8 215.4 403.4 202.1L320 63.1L236.6 202.1C229.2 215.4 214.3 221.2 200.4 217.3L37.07 170.6C17.81 165.1 8.283 143.4 17.24 125.5L58.94 42.12C61.97 36.06 68.5 32.56 75.23 33.4H75.23zM321.1 128L375.9 219.4C390.8 244.2 420.5 255.1 448.4 248L576 211.6V378.5C576 400.5 561 419.7 539.6 425.1L335.5 476.1C325.3 478.7 314.7 478.7 304.5 476.1L100.4 425.1C78.99 419.7 64 400.5 64 378.5V211.6L191.6 248C219.5 255.1 249.2 244.2 264.1 219.4L318.9 128H321.1z"/></svg>
+                <svg
+                  className='h-6 w-6 fill-white'
+                  xmlns='http://www.w3.org/2000/svg'
+                  viewBox='0 0 640 512'>
+                  <path d='M75.23 33.4L320 63.1L564.8 33.4C571.5 32.56 578 36.06 581.1 42.12L622.8 125.5C631.7 143.4 622.2 165.1 602.9 170.6L439.6 217.3C425.7 221.2 410.8 215.4 403.4 202.1L320 63.1L236.6 202.1C229.2 215.4 214.3 221.2 200.4 217.3L37.07 170.6C17.81 165.1 8.283 143.4 17.24 125.5L58.94 42.12C61.97 36.06 68.5 32.56 75.23 33.4H75.23zM321.1 128L375.9 219.4C390.8 244.2 420.5 255.1 448.4 248L576 211.6V378.5C576 400.5 561 419.7 539.6 425.1L335.5 476.1C325.3 478.7 314.7 478.7 304.5 476.1L100.4 425.1C78.99 419.7 64 400.5 64 378.5V211.6L191.6 248C219.5 255.1 249.2 244.2 264.1 219.4L318.9 128H321.1z' />
+                </svg>
                 <div className='text-sm text-white ml-2' onClick={onSubmit}>
                   {watchlistText}
                 </div>
               </a>
+              <div className='flex items-center py-2 px-4 rounded-full mx-auto text-white bg-blue-500 hover:bg-blue-700'>
+                <div
+                  className='text-sm text-white ml-2'
+                  onClick={handlePlaylistOpen}>
+                  Add to playlist
+                </div>
+              </div>
             </div>
+          </div>
+        </Box>
+      </Modal>
+      <Modal
+        open={playlistopen}
+        onClose={handlePlaylistClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'>
+        <Box sx={style}>
+          <div className='relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl'>
+            <h4 className='w-full text-4xl font-medium leading-snug'>
+              Create Playlist
+            </h4>
+            <div
+              class='mt-4 bg-blue-100 rounded-lg py-5 px-6 mb-4 text-base text-blue-700'
+              role='alert'>
+              Type an existing playlist name to add this movie to an existing
+              playlist or type a new name to create a new playlist
+            </div>
+            <form className='relative w-full mt-6 space-y-8'>
+              <div className='relative'>
+                <label className='absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white'>
+                  Playlist Name
+                </label>
+                <input
+                  type='text'
+                  className='block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black'
+                  placeholder='Can be anything'
+                />
+              </div>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox checked={checked} />}
+                  label='Private'
+                  onClick={handleChecked}
+                />
+              </FormGroup>
+              <div className='relative'>
+                <button className='inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-500 ease'>
+                  Add to playlist
+                </button>
+              </div>
+            </form>
           </div>
         </Box>
       </Modal>

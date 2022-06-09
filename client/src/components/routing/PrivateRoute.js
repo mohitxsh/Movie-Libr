@@ -6,16 +6,12 @@ function PrivateRoute({ component: Component, ...rest }) {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, loading } = authContext;
   console.log(isAuthenticated);
- 
+
   return (
     <Route
       {...rest}
       render={(props) =>
-        !isAuthenticated ? (
-          <Redirect to='/login' />
-        ) : (
-          <Component {...props} />
-        )
+        !isAuthenticated ? <Redirect to='/login' /> : <Component {...props} />
       }
     />
   );

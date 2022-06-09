@@ -19,3 +19,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const GET_PLAYLIST = "GET_PLAYLIST";
+export const ADD_PLAYLIST = "ADD_PLAYLIST";
+export const PLAYLIST_ERROR = "PLAYLIST_ERROR";
+export const DELETE_PLAYLIST = "DELETE_PLAYLIST";

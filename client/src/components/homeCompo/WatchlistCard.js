@@ -47,9 +47,9 @@ function WatchlistCard() {
                     onClick={onDelete}
                     data-id={index}>
                     Delete from Watchlist
-                    
                   </div>
                 </div>
+                
               </div>
             </div>
           </div>

@@ -11,7 +11,7 @@
     A beautiful movie library application that allows users to explore and discover epic movies and create watchlists!
     <br />
     <br />
-    <a href="https://whispering-falls-76376.herokuapp.com/login">View Demo</a>
+    <a href="https://frozen-stream-46804.herokuapp.com/">View Demo</a>
     ·
     <a href="https://github.com/mohitxsh/Movie-Libr/issues">Report Bug</a>
     ·

@@ -26,6 +26,7 @@ const MovieCard = (props) => {
   };
   console.log(playlistText);
   const [watchlistText, setWatchlistText] = useState("Add to Watchlist");
+  const [playlistNameText, setPlaylistNameText] = useState("Add to Playlist");
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setWatchlistText("Add to Watchlist");
@@ -75,6 +76,7 @@ const MovieCard = (props) => {
   };
   const onPlaylistSubmit = (e) => {
     e.preventDefault();
+    setPlaylistNameText("Added to Playlist");
     addPlaylist({
       name: playlistText,
       private: checked,
@@ -247,7 +249,7 @@ const MovieCard = (props) => {
                 <button
                   className='inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-500 ease'
                   onClick={onPlaylistSubmit}>
-                  Add to playlist
+                  {playlistNameText}
                 </button>
               </div>
             </form>

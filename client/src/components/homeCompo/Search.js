@@ -45,7 +45,7 @@ const Search = (props) => {
   return (
     <div>
       <div className=' flex flex-col justify-center'>
-        <div className='relative p-1 w-full sm:max-w-2xl sm:mx-auto'>
+        <div className='relative p-1 w-screen sm:max-w-2xl sm:mx-auto'>
           <div className='overflow-hidden z-0 rounded-full relative p-3'>
             <form className='relative flex z-50 bg-white rounded-full'>
               <input

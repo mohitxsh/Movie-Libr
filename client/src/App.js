@@ -28,7 +28,7 @@ function App() {
         <PlaylistState>
           <Router>
             <Fragment>
-              <div className='container bg-[#F3F4F6]'>
+              <div className='w-screen container bg-[#F3F4F6]'>
                 <Switch>
                   <PrivateRoute exact path='/' component={Home} />
                   <Route exact path='/playlist' component={PlaylistPage} />

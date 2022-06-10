@@ -3,6 +3,10 @@ import React, { useContext, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import WatchlistContext from "../../context/watchlist/watchlistContext";
+import PlaylistContext from "../../context/playlist/playlistContext";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 const API_KEY = "54ad1ace";
 
@@ -16,18 +20,29 @@ const style = {
 
 const MovieCard = (props) => {
   const [open, setOpen] = React.useState(false);
-
+  const [playlistText, setPlaylistText] = React.useState("");
+  const onChangePlaylistText = (e) => {
+    setPlaylistText(e.target.value);
+  };
+  console.log(playlistText);
   const [watchlistText, setWatchlistText] = useState("Add to Watchlist");
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setWatchlistText("Add to Watchlist");
     setOpen(false);
   };
+  const [playlistopen, setPlaylistopen] = React.useState(false);
+  const handlePlaylistOpen = () => setPlaylistopen(true);
+  const handlePlaylistClose = () => setPlaylistopen(false);
+
   const { title } = props;
   //console.log(title);
   //context
   const watchlistContext = useContext(WatchlistContext);
   const { addWatchlist } = watchlistContext;
+
+  const playlistContext = useContext(PlaylistContext);
+  const { addPlaylist } = playlistContext;
 
   let url = "https://www.omdbapi.com/?apikey=" + API_KEY;
 
@@ -49,6 +64,32 @@ const MovieCard = (props) => {
         t: data.Title,
         year: data.Released,
       });
+  };
+  const [checked, setChecked] = React.useState(true);
+  const handleChecked = () => {
+    if (checked === true) {
+      setChecked(false);
+    } else {
+      setChecked(true);
+    }
+  };
+  const onPlaylistSubmit = (e) => {
+    e.preventDefault();
+    addPlaylist({
+      name: playlistText,
+      private: checked,
+      movieid: [
+        {
+          imdbID: data.imdbID,
+          title: data.Title,
+          poster: data.Poster,
+          imdbRating: data.imdbRating,
+          runtime: data.Runtime,
+          actors: data.Actors,
+          release: data.Released,
+        },
+      ],
+    });
   };
   return (
     <div>
@@ -133,7 +174,7 @@ const MovieCard = (props) => {
               src={data.Poster}
               style={{ filter: "grayscale(0)" }}
             />
-            <div className='poster__footer flex flex-row relative pb-10 space-x-4 z-10 mr-5'>
+            <div className='poster__footer flex flex-row relative pb-10 space-x-4 z-10 mr-3'>
               <a
                 className='flex items-center py-2 px-4 rounded-full mx-auto text-white bg-red-500 hover:bg-red-700'
                 data-unsp-sanitized='clean'>
@@ -147,12 +188,72 @@ const MovieCard = (props) => {
                   {watchlistText}
                 </div>
               </a>
-             
+              <a
+                className='flex items-center py-2 px-4 rounded-full mx-auto text-white bg-blue-500 hover:bg-blue-700'
+                data-unsp-sanitized='clean'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  viewBox='0 0 640 512'
+                  className='h-6 w-6 fill-white'>
+                  <path d='M352 432c0 8.836-7.164 16-16 16H176c-8.838 0-16-7.164-16-16L160 128H48C21.49 128 .0003 149.5 .0003 176v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48L512 384h-160L352 432zM104 439c0 4.969-4.031 9-9 9h-30c-4.969 0-9-4.031-9-9v-30c0-4.969 4.031-9 9-9h30c4.969 0 9 4.031 9 9V439zM104 335c0 4.969-4.031 9-9 9h-30c-4.969 0-9-4.031-9-9v-30c0-4.969 4.031-9 9-9h30c4.969 0 9 4.031 9 9V335zM104 231c0 4.969-4.031 9-9 9h-30c-4.969 0-9-4.031-9-9v-30C56 196 60.03 192 65 192h30c4.969 0 9 4.031 9 9V231zM408 409c0-4.969 4.031-9 9-9h30c4.969 0 9 4.031 9 9v30c0 4.969-4.031 9-9 9h-30c-4.969 0-9-4.031-9-9V409zM591.1 0H239.1C213.5 0 191.1 21.49 191.1 48v256c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48v-256C640 21.49 618.5 0 591.1 0zM303.1 64c17.68 0 32 14.33 32 32s-14.32 32-32 32C286.3 128 271.1 113.7 271.1 96S286.3 64 303.1 64zM574.1 279.6C571.3 284.8 565.9 288 560 288H271.1C265.1 288 260.5 284.6 257.7 279.3C255 273.9 255.5 267.4 259.1 262.6l70-96C332.1 162.4 336.9 160 341.1 160c5.11 0 9.914 2.441 12.93 6.574l22.35 30.66l62.74-94.11C442.1 98.67 447.1 96 453.3 96c5.348 0 10.34 2.672 13.31 7.125l106.7 160C576.6 268 576.9 274.3 574.1 279.6z' />
+                </svg>
+                <div
+                  className='text-sm text-white ml-2'
+                  onClick={handlePlaylistOpen}>
+                  Add to Playlist
+                </div>
+              </a>
             </div>
           </div>
         </Box>
       </Modal>
-      
+      <Modal
+        open={playlistopen}
+        onClose={handlePlaylistClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'>
+        <Box sx={style}>
+          <div className='relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl'>
+            <h4 className='w-full text-4xl font-medium leading-snug'>
+              Create Playlist
+            </h4>
+            <div
+              class='mt-4 bg-blue-100 rounded-lg py-5 px-6 mb-4 text-base text-blue-700'
+              role='alert'>
+              Type an existing playlist name to add this movie to an existing
+              playlist or type a new name to create a new playlist
+            </div>
+            <form className='relative w-full mt-6 space-y-8'>
+              <div className='relative'>
+                <label className='absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white'>
+                  Playlist Name
+                </label>
+                <input
+                  type='text'
+                  className='block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black'
+                  placeholder='Can be anything'
+                  onChange={onChangePlaylistText}
+                  value={playlistText}
+                />
+              </div>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox checked={checked} />}
+                  label='Private'
+                  onClick={handleChecked}
+                />
+              </FormGroup>
+              <div className='relative'>
+                <button
+                  className='inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-500 ease'
+                  onClick={onPlaylistSubmit}>
+                  Add to playlist
+                </button>
+              </div>
+            </form>
+          </div>
+        </Box>
+      </Modal>
     </div>
   );
 };

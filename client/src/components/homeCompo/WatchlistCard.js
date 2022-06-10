@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import WatchlistContext from "../../context/watchlist/watchlistContext";
 
 function WatchlistCard() {
   const watchlistContext = useContext(WatchlistContext);
   const { watchlist, getWatchlist, deleteWatchlist } = watchlistContext;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     getWatchlist();
-  }, []);
+  }, );
 
   const onDelete = (e) => {
     console.log(e);

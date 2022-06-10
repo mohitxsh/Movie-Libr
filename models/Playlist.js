@@ -14,7 +14,13 @@ const PlaylistSchema = new Schema({
   movieid: [
     {
       imdbID: { type: String },
-    },
+      title: { type: String },
+      poster: { type: String },
+      imdbRating: { type: String },
+      runtime: { type: String },
+      actors: { type: String },
+      release: { type: String }
+    }
   ],
 });
 

@@ -28,6 +28,16 @@ const PlaylistState = (props) => {
     }
   };
 
+  //GET PLAYLIST
+  const getPublicPlaylist = async (userid) => {
+    try {
+      const res = await axios.get(`/api/playlist/${userid}`);
+      dispatch({ type: GET_PLAYLIST, payload: res.data });
+    } catch (err) {
+      dispatch({ type: PLAYLIST_ERROR, payload: err.response.msg });
+    }
+  };
+
   //ADD PLAYLIST
   const addPlaylist = async (playlist) => {
       console.log('addplaylist')
@@ -64,6 +74,7 @@ const PlaylistState = (props) => {
         addPlaylist,
         getPlaylist,
         deletePlaylist,
+        getPublicPlaylist
       }}>
       {props.children}
     </PlaylistContext.Provider>

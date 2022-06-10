@@ -14,6 +14,8 @@ import Login from "./components/auth/Login";
 import Home from "./pages/Home";
 import Register from "./components/auth/Register";
 import PlaylistState from "./context/playlist/PlaylistState";
+import PlaylistPage from "./pages/PlaylistPage";
+import PublicPlaylist from "./pages/PublicPlaylist";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -29,6 +31,12 @@ function App() {
               <div className='container bg-[#F3F4F6]'>
                 <Switch>
                   <PrivateRoute exact path='/' component={Home} />
+                  <Route exact path='/playlist' component={PlaylistPage} />
+                  <Route
+                    exact
+                    path='/playlist/:userid'
+                    component={PublicPlaylist}
+                  />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
                 </Switch>

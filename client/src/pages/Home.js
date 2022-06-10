@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import AuthContext from "../context/auth/authContext";
 import Search from "../components/homeCompo/Search";
-
+import  { Link } from 'react-router-dom'
 const Home = () => {
   const authContext = useContext(AuthContext);
   useEffect(() => {
@@ -29,12 +29,21 @@ const Home = () => {
               friends. It's all here!{" "}
             </p>
           </div>
-          <button
-            onClick={onLogout}
-            type='button'
-            className='text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>
-            Logout
-          </button>
+          <div className='grid grid-cols-2 gap-5'>
+          <Link to='/Playlist'>
+            <button
+              type='button'
+              className='text-white bg-gradient-to-br from-cyan-500 to-blue-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>
+              Playlist
+            </button>
+            </Link>
+            <button
+              onClick={onLogout}
+              type='button'
+              className='text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>
+              Logout
+            </button>
+          </div>
         </div>
       </section>
       <Search />

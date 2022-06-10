@@ -24,7 +24,7 @@
 
 ![Movie Library Screen Shot](https://github.com/mohitxsh/Movie-Libr/blob/main/assets/home.png)
 
-A WIP MERN movie library application with a focus on user friendly UI and many functionalities.
+A MERN movie library application with a focus on user friendly UI and many functionalities.
 
 Some of the features are:
 * This project uses OMDB API to retrieve movie details. Lots of information available for every movie out there including plot details, actors, IMDb rating and much more.

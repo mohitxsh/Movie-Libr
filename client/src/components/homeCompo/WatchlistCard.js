@@ -49,7 +49,6 @@ function WatchlistCard() {
                     Delete from Watchlist
                   </div>
                 </div>
-                
               </div>
             </div>
           </div>

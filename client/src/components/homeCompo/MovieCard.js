@@ -3,9 +3,6 @@ import React, { useContext, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import WatchlistContext from "../../context/watchlist/watchlistContext";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 
 const API_KEY = "54ad1ace";
 
@@ -19,15 +16,13 @@ const style = {
 
 const MovieCard = (props) => {
   const [open, setOpen] = React.useState(false);
+
   const [watchlistText, setWatchlistText] = useState("Add to Watchlist");
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setWatchlistText("Add to Watchlist");
     setOpen(false);
   };
-  const [playlistopen, setPlaylistopen] = React.useState(false);
-  const handlePlaylistOpen = () => setPlaylistopen(true);
-  const handlePlaylistClose = () => setPlaylistopen(false);
   const { title } = props;
   //console.log(title);
   //context
@@ -55,15 +50,6 @@ const MovieCard = (props) => {
         year: data.Released,
       });
   };
-  const [checked, setChecked] = React.useState(true);
-  const handleChecked = () => {
-    if (checked === true) {
-      setChecked(false);
-    } else {
-      setChecked(true);
-    }
-  };
-
   return (
     <div>
       <div
@@ -161,60 +147,12 @@ const MovieCard = (props) => {
                   {watchlistText}
                 </div>
               </a>
-              <div className='flex items-center py-2 px-4 rounded-full mx-auto text-white bg-blue-500 hover:bg-blue-700'>
-                <div
-                  className='text-sm text-white ml-2'
-                  onClick={handlePlaylistOpen}>
-                  Add to playlist
-                </div>
-              </div>
+             
             </div>
           </div>
         </Box>
       </Modal>
-      <Modal
-        open={playlistopen}
-        onClose={handlePlaylistClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'>
-        <Box sx={style}>
-          <div className='relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl'>
-            <h4 className='w-full text-4xl font-medium leading-snug'>
-              Create Playlist
-            </h4>
-            <div
-              class='mt-4 bg-blue-100 rounded-lg py-5 px-6 mb-4 text-base text-blue-700'
-              role='alert'>
-              Type an existing playlist name to add this movie to an existing
-              playlist or type a new name to create a new playlist
-            </div>
-            <form className='relative w-full mt-6 space-y-8'>
-              <div className='relative'>
-                <label className='absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white'>
-                  Playlist Name
-                </label>
-                <input
-                  type='text'
-                  className='block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black'
-                  placeholder='Can be anything'
-                />
-              </div>
-              <FormGroup>
-                <FormControlLabel
-                  control={<Checkbox checked={checked} />}
-                  label='Private'
-                  onClick={handleChecked}
-                />
-              </FormGroup>
-              <div className='relative'>
-                <button className='inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-500 ease'>
-                  Add to playlist
-                </button>
-              </div>
-            </form>
-          </div>
-        </Box>
-      </Modal>
+      
     </div>
   );
 };

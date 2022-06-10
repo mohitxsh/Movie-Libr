@@ -30,6 +30,8 @@ const PlaylistState = (props) => {
 
   //ADD PLAYLIST
   const addPlaylist = async (playlist) => {
+      console.log('addplaylist')
+      console.log(playlist);
     const config = {
       headers: {
         "Content-type": "application/json",

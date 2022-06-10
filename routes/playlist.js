@@ -18,23 +18,22 @@ router.get("/", auth, async (req, res) => {
 
 // POST api/playlist
 router.post("/", auth, async (req, res) => {
-  const { name, private, movieid } = req.body;
   try {
     const newPlaylist = new Playlist({
-      name,
-      private,
-      movieid,
+      name: req.body.name,
+      private: req.body.private,
+      movieid: [{imdbID: req.body.movieid}],
       user: req.user.id,
     });
     let playlist;
     const check = await Playlist.exists({ name: req.body.name });
-    if (check === null) {
+    if (check == null) {
       playlist = await newPlaylist.save();
       res.json(playlist);
     } else {
       Playlist.findOneAndUpdate(
         { name: req.body.name },
-        { $push: { movieid: [{ imdbID: req.body.movieid}] } },
+        { $push: { movieid: { imdbID: req.body.movieid } } },
         { upsert: true, returnOriginal: false },
         (err, doc) => {
           if (err) {

@@ -13,6 +13,7 @@ import setAuthToken from "./utils/setAuthToken";
 import Login from "./components/auth/Login";
 import Home from "./pages/Home";
 import Register from "./components/auth/Register";
+import PlaylistState from "./context/playlist/PlaylistState";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -22,17 +23,19 @@ function App() {
   return (
     <AuthState>
       <WatchlistState>
-        <Router>
-          <Fragment>
-            <div className='container bg-[#F3F4F6]'>
-              <Switch>
-                <PrivateRoute exact path='/' component={Home} />
-                <Route exact path='/register' component={Register} />
-                <Route exact path='/login' component={Login} />
-              </Switch>
-            </div>
-          </Fragment>
-        </Router>
+        <PlaylistState>
+          <Router>
+            <Fragment>
+              <div className='container bg-[#F3F4F6]'>
+                <Switch>
+                  <PrivateRoute exact path='/' component={Home} />
+                  <Route exact path='/register' component={Register} />
+                  <Route exact path='/login' component={Login} />
+                </Switch>
+              </div>
+            </Fragment>
+          </Router>
+        </PlaylistState>
       </WatchlistState>
     </AuthState>
   );

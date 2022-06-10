@@ -22,7 +22,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Movie Library Screen Shot][movie-libr-screenshot]](https://github.com/mohitxsh/Movie-Libr/blob/main/assets/home.png)
+![Movie Library Screen Shot](https://github.com/mohitxsh/Movie-Libr/blob/main/assets/home.png)
 
 A WIP MERN movie library application with a focus on user friendly UI and many functionalities.
 
@@ -32,8 +32,8 @@ Some of the features are:
 * Add movies to watchlist which you plan to watch in the future. Watchlist movie data gets stored in MongoDB and consumed using my own RESTful API.
 
 Some more screenshots:
-[![Movie Library-Login Screen Shot][movie-libr-login-screenshot]](https://github.com/mohitxsh/Movie-Libr/blob/main/assets/login.png)
-[![Movie Library-Details Screen Shot][movie-libr-details-screenshot]](https://github.com/mohitxsh/Movie-Libr/blob/main/assets/batman.png)
+![Movie Library-Login Screen Shot](https://github.com/mohitxsh/Movie-Libr/blob/main/assets/login.png)
+![Movie Library-Details Screen Shot](https://github.com/mohitxsh/Movie-Libr/blob/main/assets/batman.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

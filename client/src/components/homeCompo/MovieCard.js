@@ -34,10 +34,13 @@ const MovieCard = (props) => {
   };
   const [playlistopen, setPlaylistopen] = React.useState(false);
   const handlePlaylistOpen = () => setPlaylistopen(true);
-  const handlePlaylistClose = () => setPlaylistopen(false);
+  const handlePlaylistClose = () => {
+    setPlaylistNameText("Add to Playlist");
+    setPlaylistopen(false);
+  };
 
-  const { title } = props;
-  //console.log(title);
+  const { title, imdbId } = props;
+  console.log(imdbId);
   //context
   const watchlistContext = useContext(WatchlistContext);
   const { addWatchlist } = watchlistContext;
@@ -48,7 +51,7 @@ const MovieCard = (props) => {
   let url = "https://www.omdbapi.com/?apikey=" + API_KEY;
 
   if (open) {
-    url += "&t=" + title;
+    url += "&i=" + imdbId;
   }
   const { loading, data } = useFetch(url);
   console.log(data);

@@ -21,11 +21,13 @@ const Search = (props) => {
   }
 
   const { data } = useFetch(url);
-
+  console.log("data");
+  console.log(data);
   const renderedResults = data["Search"]?.map((d) => {
     return (
       <MovieCard
         key={d.imdbID}
+        imdbId={d.imdbID}
         imgUrl={d.Poster}
         title={d.Title}
         type={d.Type}

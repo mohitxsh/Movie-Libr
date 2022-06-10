@@ -11,7 +11,7 @@
     A beautiful movie library application that allows users to explore and discover epic movies and create watchlists!
     <br />
     <br />
-    <a href="https://whispering-falls-76376.herokuapp.com/login">View Demo</a>
+    <a href="https://frozen-stream-46804.herokuapp.com/">View Demo</a>
     ·
     <a href="https://github.com/mohitxsh/Movie-Libr/issues">Report Bug</a>
     ·
@@ -24,12 +24,13 @@
 
 ![Movie Library Screen Shot](https://github.com/mohitxsh/Movie-Libr/blob/main/assets/home.png)
 
-A WIP MERN movie library application with a focus on user friendly UI and many functionalities.
+A MERN movie library application with a focus on user friendly UI and many functionalities.
 
 Some of the features are:
 * This project uses OMDB API to retrieve movie details. Lots of information available for every movie out there including plot details, actors, IMDb rating and much more.
 * Secure authentication using JWT. I use my own API to store user details. New users can register too!
 * Add movies to watchlist which you plan to watch in the future. Watchlist movie data gets stored in MongoDB and consumed using my own RESTful API.
+* Users can create custom movie playlists. A playlist can either be public or private. Public playlist link is available on the playlist page once signed in. Public playlists can be viewed by anyone without any authentication!
 
 Some more screenshots:
 ![Movie Library-Login Screen Shot](https://github.com/mohitxsh/Movie-Libr/blob/main/assets/login.png)

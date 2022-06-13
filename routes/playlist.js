@@ -83,7 +83,7 @@ router.get("/:userid", async (req, res) => {
     console.log(err.message);
     res.status(500).send("Server Error");
   }
-})
+});
 
 //delete
 router.delete("/:id", auth, async (req, res) => {

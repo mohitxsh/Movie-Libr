@@ -7,7 +7,7 @@ function WatchlistCard() {
 
   useLayoutEffect(() => {
     getWatchlist();
-  }, );
+  });
 
   const onDelete = (e) => {
     console.log(e);
@@ -58,7 +58,7 @@ function WatchlistCard() {
   });
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
-      {renderedResults}
+      {watchlist.length ? renderedResults : <div className="mb-8 lg:text-base text-sm leading-relaxed text-left text-gray-500 flex flex-row justify-center items-center">No watchlist to show!</div>}
     </div>
   );
 }

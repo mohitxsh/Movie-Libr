@@ -4,7 +4,14 @@
   <a href="https://github.com/mohitxsh/Movie-Libr">
     <img src="assets/movie-libr.png" alt="Logo" width="80" height="80">
   </a>
-
+  <!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Demo credentials</summary>
+  <code>
+    user3@test.com</br>
+    user3
+  </code>
+</details>
   <h3 align="center">Movie Library</h3>
 
   <p align="center">
@@ -23,15 +30,6 @@
 ## About The Project
 
 ![Movie Library Screen Shot](https://github.com/mohitxsh/Movie-Libr/blob/main/assets/home.png)
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <code>
-    user3@test.com
-    user3
-  </code>
-</details>
 
 A MERN movie library application with a focus on user friendly UI and many functionalities.
 

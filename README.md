@@ -11,7 +11,9 @@
   <summary>Demo credentials</summary>
   <code>
     user3@test.com 
+    </code>
     <br/>
+    <code>
     user3
   </code>
 </details>

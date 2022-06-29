@@ -24,6 +24,15 @@
 
 ![Movie Library Screen Shot](https://github.com/mohitxsh/Movie-Libr/blob/main/assets/home.png)
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <code>
+    user3@test.com
+    user3
+  </code>
+</details>
+
 A MERN movie library application with a focus on user friendly UI and many functionalities.
 
 Some of the features are:

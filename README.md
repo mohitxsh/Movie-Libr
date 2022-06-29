@@ -5,15 +5,16 @@
     <img src="assets/movie-libr.png" alt="Logo" width="80" height="80">
   </a>
   <!-- TABLE OF CONTENTS -->
-<details>
+
+  <h3 align="center">Movie Library</h3>
+  <details>
   <summary>Demo credentials</summary>
   <code>
-    user3@test.com</br>
+    user3@test.com 
+    <br/>
     user3
   </code>
 </details>
-  <h3 align="center">Movie Library</h3>
-
   <p align="center">
     A beautiful movie library application that allows users to explore and discover epic movies and create watchlists!
     <br />

@@ -35,7 +35,7 @@ const Login = (props) => {
               <form className='bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-4'>
                 {/* @csrf */}
                 <div className='text-gray-600 font-medium text-2xl flex justify-center py-2 mb-4'>
-                  Login to discover epic movies!
+                  Login to discover epic movies
                 </div>
                 <div className='mb-4'>
                   <label

@@ -6,7 +6,7 @@
   </a>
   <!-- TABLE OF CONTENTS -->
 
-  <h3 align="center">Movie Librar</h3>
+  <h3 align="center">Movie Library</h3>
   <details>
   <summary>Demo credentials</summary>
   <code>

@@ -28,17 +28,17 @@ function App() {
         <PlaylistState>
           <Router>
             <Fragment>
-              <div className='w-screen bg-[#F3F4F6]'>
+              <div className="w-screen bg-[#F3F4F6]">
                 <Switch>
-                  <PrivateRoute exact path='/' component={Home} />
-                  <Route exact path='/playlist' component={PlaylistPage} />
+                  <PrivateRoute exact path="/" component={Home} />
+                  <Route exact path="/playlist" component={PlaylistPage} />
                   <Route
                     exact
-                    path='/playlist/:userid'
+                    path="/playlist/:userid"
                     component={PublicPlaylist}
                   />
-                  <Route exact path='/register' component={Register} />
-                  <Route exact path='/login' component={Login} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/login" component={Login} />
                 </Switch>
               </div>
             </Fragment>
